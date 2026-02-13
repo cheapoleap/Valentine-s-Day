@@ -1,0 +1,185 @@
+/* Base Styles (Desktop / large screens) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  background: linear-gradient(135deg, #f5e0ee, #d5aecb);
+  font-family: "Poppins", sans-serif;
+  color: #4a4a4a;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.img {
+  width: auto;
+  height: 28rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.img:hover {
+  transform: scale(1.03);
+}
+
+.title {
+  font-size: 3.6rem;
+  font-weight: 600;
+  color: hotpink;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1.6rem 3rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-yes {
+  background-color: #26953c;
+  color: white;
+}
+
+.btn-no {
+  background-color: rgb(166, 37, 82);
+  color: white;
+  transition: transform 0.3s, opacity 0.5s, background-color 0.3s;
+}
+
+.hidden {
+  display: none;
+}
+
+.hearts span {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* -------------------- */
+/* Responsive for iPhone 12 Pro Max (428px width) */
+@media screen and (max-width: 428px) {
+  html {
+    font-size: 50%; /* scales text down for smaller screens */
+  }
+
+  .container {
+    padding: 2rem;
+    width: 90%;
+  }
+
+  .img {
+    height: 18rem; /* smaller image */
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    padding: 1.2rem 2rem;
+    font-size: 1.4rem;
+  }
+
+  .buttons {
+    gap: 1rem;
+  }
+}
+#start-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #f5e0ee, #d5aecb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  z-index: 9999;
+  cursor: pointer;
+}
+/* 🌈 Rainbow background animation */
+.rainbow-bg {
+  animation: rainbowMove 6s linear infinite;
+  background: linear-gradient(270deg, #ff6ec4, #7873f5, #4ade80, #facc15, #fb7185);
+  background-size: 1000% 1000%;
+}
+
+@keyframes rainbowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ✨ Glowing YES button */
+.glow {
+  animation: pulseGlow 1.5s infinite;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px hotpink; }
+  50% { box-shadow: 0 0 30px hotpink; }
+  100% { box-shadow: 0 0 10px hotpink; }
+}
+
+/* 📳 Screen shake */
+.shake {
+  animation: shakeScreen 0.4s;
+}
+
+@keyframes shakeScreen {
+  0% { transform: translate(0); }
+  25% { transform: translate(-5px, 5px); }
+  50% { transform: translate(5px, -5px); }
+  75% { transform: translate(-5px, -5px); }
+  100% { transform: translate(0); }
+}
+
+
