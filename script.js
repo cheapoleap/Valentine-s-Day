@@ -263,5 +263,115 @@ function sparkleEffect() {
   }, 300);
 }
 sparkleEffect();
+/* ================= NO CLICK ================= */
+
+noBtn.addEventListener("click", () => {
+  if (!play) return; // Stop interaction after YES clicked
+
+  noCount++;
+
+  // 1️⃣ Resize YES button to tease
+  resizeYesButton();
+
+  // 2️⃣ Shrink NO button slightly
+  shrinkNoButton();
+
+  // 3️⃣ Update NO button text
+  updateNoButtonText();
+
+  // 4️⃣ Make NO button "run away" after some clicks
+  if (noCount >= RUN_AWAY_AT) {
+    makeNoRunAway();
+  }
+
+  // 5️⃣ Trigger heart rain after max clicks
+  if (noCount >= MAX_NO_CLICKS) {
+    startHeartRain();
+    noBtn.style.opacity = "0";
+    noBtn.style.pointerEvents = "none";
+    play = false; // disable further clicks
+  }
+});
+
+/* ================= NO BUTTON EFFECTS ================= */
+
+function resizeYesButton() {
+  if (yesButtonSize < 6) {
+    yesButtonSize *= 1.4;
+    yesBtn.style.transform = `scale(${yesButtonSize})`;
+  }
+}
+
+function shrinkNoButton() {
+  noButtonSize *= 0.9;
+  noBtn.style.transform = `scale(${noButtonSize})`;
+}
+
+function updateNoButtonText() {
+  const messages = [
+    "No 😔",
+    "Kom jg ban ot baby 🥺",
+    "Na Oun Nka Na 🥹",
+    "Ot teh min pit teh baby 😭",
+    "Baby B somvor Nka 😭",
+    "B chue Jab baby 💔",
+    "I gonna Cry baby 😭💔",
+  ];
+  noBtn.innerHTML = messages[Math.min(noCount - 1, messages.length - 1)];
+}
+
+/* ================= MAKE NO BUTTON RUN AWAY ================= */
+
+function makeNoRunAway() {
+  // Use viewport % for mobile safety
+  const x = Math.random() * 80 + 10; // 10% to 90%
+  const y = Math.random() * 80 + 10;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = x + "vw";
+  noBtn.style.top = y + "vh";
+  noBtn.style.transition = "left 0.3s ease, top 0.3s ease";
+
+  // Play escape sound
+  escapeSound.currentTime = 0;
+  escapeSound.play();
+
+  // Vibrate if supported
+  if (navigator.vibrate) {
+    navigator.vibrate(100);
+  }
+}
+
+/* ================= HEART RAIN EFFECT ================= */
+
+function startHeartRain() {
+  const hearts = document.querySelector(".hearts");
+
+  const heartInterval = setInterval(() => {
+    const heart = document.createElement("span");
+    heart.innerHTML = "💗";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-5vh";
+    heart.style.fontSize = Math.random() * 24 + 16 + "px";
+    heart.style.opacity = 1;
+    heart.style.transition = "transform 4s linear, opacity 4s linear";
+
+    hearts.appendChild(heart);
+
+    // Animate falling
+    setTimeout(() => {
+      heart.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
+      heart.style.opacity = 0;
+    }, 50);
+
+    // Remove after animation
+    setTimeout(() => heart.remove(), 4100);
+  }, 300);
+
+  // Stop interval after some time (optional)
+  setTimeout(() => clearInterval(heartInterval), 20000); // 20s of hearts
+}
+
 
 
